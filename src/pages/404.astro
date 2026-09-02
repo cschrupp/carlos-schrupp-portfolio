@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/paths";
+---
+
+<BaseLayout title="Page not found — Carlos Schrupp">
+  <section class="not-found">
+    <div class="shell">
+      <p class="eyebrow">404</p>
+      <h1>This depth interval is outside the logged section.</h1>
+      <p>The page you requested does not exist or has moved.</p>
+      <a class="button button-primary" href={withBase("/")}>Return home</a>
+    </div>
+  </section>
+</BaseLayout>

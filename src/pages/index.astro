@@ -1,0 +1,127 @@
+---
+import ProjectCard from "../components/ProjectCard.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { credentials, experience, profile } from "../data/profile";
+import { projects } from "../data/projects";
+import { withBase } from "../lib/paths";
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">{profile.focus}</p>
+        <h1>{profile.name}</h1>
+        <p class="hero-role">{profile.role}</p>
+        <p class="hero-statement">{profile.statement}</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href={withBase("/portfolio")}>View projects</a>
+          <a class="button button-secondary" href={withBase("/contact")}>Contact</a>
+        </div>
+        <ul class="hero-proof" aria-label="Professional summary">
+          <li><strong>20+ years</strong><span>Energy and subsurface work</span></li>
+          <li><strong>4 countries</strong><span>International operations</span></li>
+          <li><strong>Berkeley MIDS</strong><span>Completed 2026</span></li>
+        </ul>
+      </div>
+      <div class="hero-portrait-wrap">
+        <div class="depth-scale" aria-hidden="true"><span>000</span><span>100</span><span>200</span><span>300</span></div>
+        <figure class="hero-portrait">
+          <img src={withBase("/assets/carlos-schrupp.webp")} alt="Portrait of Carlos Schrupp" width="318" height="296" />
+          <figcaption>
+            <span>Electronics engineer</span>
+            <span>Data scientist</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section selected-work" id="work">
+    <div class="shell">
+      <SectionHeading
+        eyebrow="Selected work"
+        title="Projects built where technical context changes the answer."
+        copy="A deliberately small portfolio: scientific software from the subsurface domain and a deployed AI learning platform."
+      />
+      <div class="project-stack">
+        {projects.map((project, index) => <ProjectCard project={project} featured={index === 0} />)}
+      </div>
+      <a class="section-link" href={withBase("/portfolio")}>View the project index <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="section about-section" id="about">
+    <div class="shell about-grid">
+      <SectionHeading eyebrow="About" title="Engineering experience before machine learning became the tool." />
+      <div class="about-copy">
+        <p class="lead">
+          I am an Electronics Engineer with more than two decades in oil and gas, working with well logs, geological and geophysical data, acquisition QA/QC and operational risk.
+        </p>
+        <p>
+          UC Berkeley's MIDS program added machine learning, statistics, data engineering, NLP and production AI systems to that foundation. I now focus on work where engineering judgment is part of the model boundary—not merely background context.
+        </p>
+        <div class="about-pillars">
+          <div><span>01</span><strong>Subsurface data</strong><p>Well logs, acquisition quality and technical validation.</p></div>
+          <div><span>02</span><strong>Applied ML</strong><p>Models and analytical workflows grounded in physical systems.</p></div>
+          <div><span>03</span><strong>AI systems</strong><p>RAG, orchestration, evaluation and cloud infrastructure.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section experience-section" id="experience">
+    <div class="shell">
+      <SectionHeading
+        eyebrow="Experience"
+        title="From field execution to operator decisions and independent consulting."
+        copy="A concise view of the work that informs the technical projects in this portfolio."
+      />
+      <div class="experience-list">
+        {experience.map((item, index) => (
+          <article class="experience-item">
+            <p class="experience-index">0{index + 1}</p>
+            <div>
+              <h3>{item.organization}</h3>
+              <p class="experience-role">{item.role}</p>
+              <p class="experience-period">{item.period}</p>
+            </div>
+            <div>
+              <p>{item.summary}</p>
+              <p class="evidence">{item.evidence}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section credentials-section">
+    <div class="shell">
+      <SectionHeading eyebrow="Education" title="Statistical depth built on an engineering foundation." />
+      <div class="credential-grid">
+        {credentials.map((item) => (
+          <article>
+            <p class="credential-institution">{item.institution}</p>
+            <h3>{item.credential}</h3>
+            <p>{item.detail}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-band">
+    <div class="shell contact-band-grid">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2>Looking for experience that travels from the field to the model.</h2>
+      </div>
+      <div>
+        <p>Interested in data science, machine learning, energy and industrial AI roles or consulting work where domain experience improves technical decisions.</p>
+        <a class="button button-light" href={withBase("/contact")}>Start a conversation</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
