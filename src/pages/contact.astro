@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { profile } from "../data/profile";
+---
+
+<BaseLayout
+  title="Contact — Carlos Schrupp"
+  description="Contact Carlos Schrupp about data science, machine learning, energy and industrial AI work."
+>
+  <section class="contact-page">
+    <div class="shell contact-page-grid">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h1>Let's discuss the problem before choosing the model.</h1>
+        <p class="contact-intro">
+          I am interested in roles and consulting work involving data science, machine learning, energy and industrial AI—particularly when engineering judgment and domain experience change the technical approach.
+        </p>
+      </div>
+      <div class="contact-options">
+        {profile.email && (
+          <a href={`mailto:${profile.email}`}>
+            <span>Email</span>
+            <strong>{profile.email}</strong>
+            <i aria-hidden="true">→</i>
+          </a>
+        )}
+        <a href={profile.linkedin} target="_blank" rel="noreferrer">
+          <span>LinkedIn</span>
+          <strong>Professional profile</strong>
+          <i aria-hidden="true">↗</i>
+        </a>
+        <a href={profile.github} target="_blank" rel="noreferrer">
+          <span>GitHub</span>
+          <strong>Open-source work</strong>
+          <i aria-hidden="true">↗</i>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

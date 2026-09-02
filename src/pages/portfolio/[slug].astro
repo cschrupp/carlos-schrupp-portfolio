@@ -1,0 +1,128 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { projects, type Project } from "../../data/projects";
+import { withBase } from "../../lib/paths";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const nextProject = projects[(projects.findIndex((item) => item.slug === project.slug) + 1) % projects.length];
+---
+
+<BaseLayout title={`${project.title} — Carlos Schrupp`} description={project.description}>
+  <article class:list={["case-study", `accent-${project.accent}`]}>
+    <header class="case-hero">
+      <div class="shell">
+        <a class="breadcrumb" href={withBase("/portfolio")}><span aria-hidden="true">←</span> Portfolio</a>
+        <div class="case-hero-grid">
+          <div>
+            <p class="eyebrow">{project.eyebrow}</p>
+            <h1>{project.title}</h1>
+            <p class="case-summary">{project.summary}</p>
+            <p class="case-description">{project.description}</p>
+            <div class="project-links">
+              {project.links.map((link, index) => (
+                <a class:list={["button", index === 0 ? "button-primary" : "button-secondary"]} href={link.href} target="_blank" rel="noreferrer">
+                  {link.label}<span aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
+          </div>
+          <dl class="case-meta">
+            <div><dt>Role</dt><dd>{project.role}</dd></div>
+            <div><dt>Team</dt><dd>{project.collaboration}</dd></div>
+            <div><dt>Status</dt><dd>{project.status}</dd></div>
+            <div><dt>Year</dt><dd>{project.year}</dd></div>
+          </dl>
+        </div>
+      </div>
+    </header>
+
+    <section class:list={["case-media", project.imageClass]}>
+      <div class="shell">
+        <figure>
+          <img src={withBase(project.image)} alt={project.imageAlt} loading="eager" />
+          <figcaption>{project.slug === "wellplot" ? "Rendered CBL/VDL main-pass example from the public WellPlot documentation." : "Final CodingRabbit MVP architecture, covering online tutoring, course control and offline evaluation."}</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="case-facts">
+      <div class="shell fact-grid">
+        {project.facts.map((fact) => (
+          <article>
+            <p class="fact-value">{fact.value}</p>
+            <h2>{fact.label}</h2>
+            <p>{fact.detail}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="shell case-two-column">
+        <div class="case-section-heading"><p class="eyebrow">Context</p><h2>{project.contextTitle}</h2></div>
+        <div class="prose large-prose">{project.context.map((paragraph) => <p>{paragraph}</p>)}</div>
+      </div>
+    </section>
+
+    <section class="case-section case-section-tinted">
+      <div class="shell case-two-column">
+        <div class="case-section-heading"><p class="eyebrow">Product</p><h2>{project.builtTitle}</h2></div>
+        <ul class="built-list">
+          {project.built.map((item, index) => <li><span>0{index + 1}</span><p>{item}</p></li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="case-section architecture-section">
+      <div class="shell">
+        <div class="architecture-heading">
+          <div><p class="eyebrow">System architecture</p><h2>From input to evidence.</h2></div>
+          <p>The public implementation separates each responsibility so data, policy and evaluation remain inspectable.</p>
+        </div>
+        <ol class="architecture-flow">
+          {project.architecture.map((step, index) => <li><span>{String(index + 1).padStart(2, "0")}</span><p>{step}</p></li>)}
+        </ol>
+      </div>
+    </section>
+
+    <section class="case-section case-section-dark">
+      <div class="shell case-two-column">
+        <div class="case-section-heading"><p class="eyebrow">Contribution</p><h2>{project.contributionTitle}</h2></div>
+        <ul class="contribution-list">
+          {project.contributions.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="shell case-two-column">
+        <div class="case-section-heading"><p class="eyebrow">Engineering decisions</p><h2>Boundaries that keep the system honest.</h2></div>
+        <div>
+          <ul class="decision-list">{project.decisions.map((item) => <li>{item}</li>)}</ul>
+          <aside class="caveat"><strong>Evidence boundary</strong><p>{project.caveat}</p></aside>
+        </div>
+      </div>
+    </section>
+
+    <footer class="case-footer">
+      <div class="shell case-footer-grid">
+        <p>{project.sourceNote}</p>
+        <a href={withBase(`/portfolio/${nextProject.slug}`)}>
+          <span>Next project</span>
+          <strong>{nextProject.title} →</strong>
+        </a>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>

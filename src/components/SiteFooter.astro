@@ -1,0 +1,21 @@
+---
+import { profile } from "../data/profile";
+import { withBase } from "../lib/paths";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <div>
+      <a class="footer-name" href={withBase("/")}>{profile.name}</a>
+      <p>{profile.role}<br />{profile.focus}</p>
+    </div>
+    <div class="footer-links" aria-label="External profiles">
+      {profile.email && <a href={`mailto:${profile.email}`}>Email</a>}
+      <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+      <a href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+    <p class="footer-meta">© {year} Carlos Schrupp<br />Built with Astro.</p>
+  </div>
+</footer>

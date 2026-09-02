@@ -1,0 +1,29 @@
+---
+import { withBase } from "../lib/paths";
+
+const pathname = Astro.url.pathname;
+const links = [
+  { label: "Work", href: withBase("/portfolio"), active: pathname.includes("/portfolio") },
+  { label: "Experience", href: `${withBase("/")}#experience`, active: false },
+  { label: "About", href: `${withBase("/")}#about`, active: false },
+  { label: "Contact", href: withBase("/contact"), active: pathname.includes("/contact") },
+];
+---
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href={withBase("/")} aria-label="Carlos Schrupp, home">
+      <span class="brand-mark" aria-hidden="true">CS</span>
+      <span>Carlos Schrupp</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <ul>
+        {links.map((link) => (
+          <li>
+            <a href={link.href} aria-current={link.active ? "page" : undefined}>{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>

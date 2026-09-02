@@ -1,0 +1,40 @@
+---
+import ProjectCard from "../../components/ProjectCard.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { projects } from "../../data/projects";
+---
+
+<BaseLayout
+  title="Portfolio — Carlos Schrupp"
+  description="Selected scientific software and applied AI projects by Carlos Schrupp."
+>
+  <section class="page-hero portfolio-hero">
+    <div class="shell page-hero-grid">
+      <div>
+        <p class="eyebrow">Portfolio</p>
+        <h1>Selected technical work.</h1>
+      </div>
+      <p class="page-intro">
+        Projects chosen for what they demonstrate: domain-specific software, production AI architecture, technical ownership and evidence-aware evaluation.
+      </p>
+    </div>
+  </section>
+
+  <section class="section portfolio-list-section">
+    <div class="shell project-stack">
+      {projects.map((project, index) => <ProjectCard project={project} featured={index === 0} />)}
+    </div>
+  </section>
+
+  <section class="future-note">
+    <div class="shell future-note-grid">
+      <p class="eyebrow">In development</p>
+      <div>
+        <h2>Physics-aware wireline tension modeling</h2>
+        <p>
+          A future research project combining a physics-based tension simulator with measured deployment data to infer friction and other unobserved system effects. It will be added here only when the evidence and implementation are ready to review.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
