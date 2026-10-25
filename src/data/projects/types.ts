@@ -56,6 +56,7 @@ export type Project = {
   facts: ProjectFact[];
   visual: ProjectVisual;
   phases?: ProjectPhase[];
+  heroMeta?: ProjectHeroMeta[];
   sections: ProjectSection[];
   sourceNote: string;
 };
