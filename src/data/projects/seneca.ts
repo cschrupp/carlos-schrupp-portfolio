@@ -11,7 +11,7 @@ export const seneca: Project = {
   detailMode: "deep",
   role: "Founder / technical lead",
   teamContext: "Independent product · implementation substantially agent-assisted",
-  status: "Active product R&D",
+  status: "Active development product",
   statusDetail:
     "Core retrieval, grounded answering, evaluation and product workflows are implemented; large-source and dual-backend qualification remain bounded by explicit evidence gates.",
   dates: "2026 — Present",
