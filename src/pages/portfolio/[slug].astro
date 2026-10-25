@@ -17,7 +17,7 @@ interface Props {
 
 const { project } = Astro.props;
 const currentIndex = projects.findIndex((item) => item.slug === project.slug);
-const nextProject = projects[(currentIndex + 1) % projects.length];
+const nextProject = projects[(currentIndex + 1) % projects.length];\nconst heroMeta = project.heroMeta ?? [\n  { label: "Status", value: project.status },\n  { label: "Role", value: project.role },\n  { label: "Context", value: project.teamContext },\n  { label: "Dates", value: project.dates },\n  {\n    label: "Depth",\n    value:\n      project.detailMode === "deep"\n        ? "Technical case study"\n        : project.detailMode === "compact"\n          ? "Compact project page"\n          : "In-progress preview",\n  },\n];
 ---
 
 <BaseLayout title={`${project.title} — Carlos Schrupp`} description={project.description}>
@@ -45,11 +45,9 @@ const nextProject = projects[(currentIndex + 1) % projects.length];
             </div>
           </div>
           <dl class="case-meta">
-            <div><dt>Status</dt><dd>{project.status}</dd></div>
-            <div><dt>Role</dt><dd>{project.role}</dd></div>
-            <div><dt>Context</dt><dd>{project.teamContext}</dd></div>
-            <div><dt>Dates</dt><dd>{project.dates}</dd></div>
-            <div><dt>Depth</dt><dd>{project.detailMode === "deep" ? "Technical case study" : project.detailMode === "compact" ? "Compact project page" : "In-progress preview"}</dd></div>
+            {heroMeta.map((item) => (
+              <div><dt>{item.label}</dt><dd>{item.value}</dd></div>
+            ))}
           </dl>
         </div>
         {project.phases && (
