@@ -1,0 +1,28 @@
+---
+import type { Project, ProjectVisual as Visual } from "../data/projects";
+import { withBase } from "../lib/paths";
+
+interface Props {
+  project: Project;
+  visual?: Visual;
+  compact?: boolean;
+}
+
+const { project, visual = project.visual, compact = false } = Astro.props;
+---
+
+<div class:list={["project-visual-frame", `accent-${project.accent}`, { compact }]}>
+  {visual.type === "image" && visual.src ? (
+    <img src={withBase(visual.src)} alt={visual.alt} loading="lazy" />
+  ) : (
+    <div class="system-diagram" role="img" aria-label={visual.alt}>
+      {(visual.labels ?? []).map((label, index) => (
+        <>
+          <span class="system-node"><i>{String(index + 1).padStart(2, "0")}</i>{label}</span>
+          {index < (visual.labels?.length ?? 0) - 1 && <b aria-hidden="true">→</b>}
+        </>
+      ))}
+    </div>
+  )}
+  {visual.caption && <p class="visual-caption">{visual.caption}</p>}
+</div>

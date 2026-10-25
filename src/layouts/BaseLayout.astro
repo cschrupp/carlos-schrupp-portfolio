@@ -2,6 +2,7 @@
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import "../styles/global.css";
+import "../styles/refresh.css";
 import { withBase } from "../lib/paths";
 
 interface Props {
@@ -10,8 +11,8 @@ interface Props {
 }
 
 const {
-  title = "Carlos Schrupp — Data Scientist & Machine Learning Engineer",
-  description = "Carlos Schrupp builds data and machine-learning systems for energy, subsurface and industrial engineering problems.",
+  title = "Carlos Schrupp — Applied AI & Computational Engineering",
+  description = "Carlos Schrupp builds applied AI, machine-learning and scientific-computing systems for energy, subsurface and industrial engineering problems.",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);

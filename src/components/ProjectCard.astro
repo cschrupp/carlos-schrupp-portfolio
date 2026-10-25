@@ -1,39 +1,35 @@
 ---
-import type { Project } from "../data/projects";
+import type { Project, ProjectCardPlacement } from "../data/projects";
 import { withBase } from "../lib/paths";
+import ProjectVisual from "./ProjectVisual.astro";
 
 interface Props {
-  project: Project;
-  featured?: boolean;
+  placement: ProjectCardPlacement & { project: Project };
+  compact?: boolean;
 }
 
-const { project, featured = false } = Astro.props;
+const { placement, compact = false } = Astro.props;
+const { project } = placement;
+const target = `/portfolio/${project.slug}${placement.phaseAnchor ? `#${placement.phaseAnchor}` : ""}`;
 ---
 
-<article class:list={["project-card", `accent-${project.accent}`, { featured }]}>
-  <a class="project-visual" href={withBase(`/portfolio/${project.slug}`)} aria-label={`Read the ${project.title} case study`}>
-    {project.slug === "wellplot" ? (
-      <img src={withBase(project.image)} alt={project.imageAlt} width="993" height="980" loading="lazy" />
-    ) : (
-      <div class="codingrabbit-card-art" aria-hidden="true">
-        <span>Authenticated learning</span>
-        <span>Course-grounded RAG</span>
-        <span>Guarded inference</span>
-        <span>Offline evaluation</span>
-      </div>
-    )}
+<article class:list={["project-card", `accent-${project.accent}`, { compact }, `mode-${project.detailMode}`]}>
+  <a class="project-card-visual" href={withBase(target)} aria-label={`Open ${placement.title}`}>
+    <ProjectVisual project={project} compact />
   </a>
   <div class="project-card-body">
     <div class="project-card-meta">
-      <span>{project.eyebrow}</span>
-      <span>{project.year}</span>
+      <span>{placement.eyebrow}</span>
+      <span class="status-badge">{placement.status}</span>
     </div>
-    <h3><a href={withBase(`/portfolio/${project.slug}`)}>{project.title}</a></h3>
-    <p class="project-summary">{project.summary}</p>
-    <p>{project.description}</p>
-    <div class="tag-list" aria-label={`${project.title} technologies`}>
-      {project.technologies.slice(0, featured ? 6 : 4).map((technology) => <span>{technology}</span>)}
+    <h3><a href={withBase(target)}>{placement.title}</a></h3>
+    <p class="project-summary">{placement.summary}</p>
+    <p class="project-card-role">{project.role}</p>
+    <div class="tag-list" aria-label={`${placement.title} technologies`}>
+      {project.technologies.slice(0, compact ? 3 : 5).map((technology) => <span>{technology}</span>)}
     </div>
-    <a class="text-link" href={withBase(`/portfolio/${project.slug}`)}>Read case study <span aria-hidden="true">→</span></a>
+    <a class="text-link" href={withBase(target)}>
+      {project.detailMode === "preview" ? "View current work" : "View project"} <span aria-hidden="true">→</span>
+    </a>
   </div>
 </article>

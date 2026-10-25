@@ -1,10 +1,9 @@
 export const profile = {
   name: "Carlos Schrupp",
-  role: "Data Scientist & Machine Learning Engineer",
-  focus: "Energy · Subsurface · Applied AI",
+  role: "Applied AI & Computational Engineering",
+  focus: "Energy · Subsurface · Industrial AI",
   statement:
-    "I build data and machine-learning systems for engineering problems where domain knowledge and operational judgment affect the result.",
-  // TODO: Add Carlos's preferred public contact email after confirmation.
+    "I build AI, machine-learning and scientific-computing systems for engineering problems where domain knowledge, physical constraints and operational judgment affect the result.",
   email: null as string | null,
   linkedin: "https://www.linkedin.com/in/cschrupp/",
   github: "https://github.com/cschrupp",
@@ -16,9 +15,9 @@ export const experience = [
     role: "Owner & Principal Consultant",
     period: "2016 — Present",
     summary:
-      "Independent subsurface and wireline consulting, including technical assurance, acquisition QA/QC, operational risk control and professional training.",
+      "Independent subsurface and wireline consulting, including technical assurance, acquisition QA/QC, operational risk control, training and applied data-science work.",
     evidence:
-      "Work for YPFB Corporación, YPFB Chaco and Petrobras Bolivia; a five-module quality and operational-control program developed from a 200+ job knowledge base.",
+      "Work across operator and service-company contexts, with technical decisions grounded in well-log acquisition, interpretation constraints and field execution.",
   },
   {
     organization: "YPFB Chaco",
