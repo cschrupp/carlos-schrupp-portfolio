@@ -17,7 +17,22 @@ interface Props {
 
 const { project } = Astro.props;
 const currentIndex = projects.findIndex((item) => item.slug === project.slug);
-const nextProject = projects[(currentIndex + 1) % projects.length];\nconst heroMeta = project.heroMeta ?? [\n  { label: "Status", value: project.status },\n  { label: "Role", value: project.role },\n  { label: "Context", value: project.teamContext },\n  { label: "Dates", value: project.dates },\n  {\n    label: "Depth",\n    value:\n      project.detailMode === "deep"\n        ? "Technical case study"\n        : project.detailMode === "compact"\n          ? "Compact project page"\n          : "In-progress preview",\n  },\n];
+const nextProject = projects[(currentIndex + 1) % projects.length];
+const heroMeta = project.heroMeta ?? [
+  { label: "Status", value: project.status },
+  { label: "Role", value: project.role },
+  { label: "Context", value: project.teamContext },
+  { label: "Dates", value: project.dates },
+  {
+    label: "Depth",
+    value:
+      project.detailMode === "deep"
+        ? "Technical case study"
+        : project.detailMode === "compact"
+          ? "Compact project page"
+          : "In-progress preview",
+  },
+];
 ---
 
 <BaseLayout title={`${project.title} — Carlos Schrupp`} description={project.description}>
