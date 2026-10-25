@@ -34,7 +34,7 @@ export type ProjectSection = {
   caveat?: string;
 };
 
-export type ProjectPhase = { id: string; label: string; status: string; summary: string; };
+export type ProjectPhase = { id: string; label: string; status: string; summary: string; };\nexport type ProjectHeroMeta = { label: string; value: string; };
 
 export type Project = {
   slug: ProjectSlug;
