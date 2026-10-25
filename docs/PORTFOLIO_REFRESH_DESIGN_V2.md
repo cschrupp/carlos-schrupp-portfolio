@@ -1,118 +1,281 @@
 # Portfolio Refresh v2 — Design Specification
 
-Status: DESIGN DRAFT
-Branch: `design/portfolio-refresh-v2`
-Architecture baseline: `01e24746207c67b1eca2d731f267ec30f2433b3a`
+**Status:** DESIGN CANDIDATE — READY FOR INDEPENDENT REVIEW  
+**Branch:** `design/portfolio-refresh-v2`  
+**Architecture baseline:** `01e24746207c67b1eca2d731f267ec30f2433b3a`  
+**Design baseline before completion:** `0f2d835dbf678d5b1ec00a90cb6cf76069bdac82`
 
 ## 1. Design objective
 
-Translate the accepted portfolio architecture into a concrete content and page system.
+Translate the accepted portfolio architecture into a concrete page, content and data system that can support the first complete website candidate without forcing every project into the same narrative depth.
 
-The design must support three uses without creating three separate narratives:
+The website is the canonical presentation surface. Interview material and later social posts are derivatives of accepted project evidence and stories.
 
-1. website case study;
-2. interview discussion;
-3. later social-media / LinkedIn posts.
+No production Astro implementation is authorized by this document alone.
 
-The website is the canonical source. Social content is derived from evidence-backed story chapters inside each project record.
+## 2. Portfolio-wide design decision
 
-No production Astro implementation is authorized in this phase.
+The portfolio will intentionally support **three project-detail depths**.
 
-## 2. Audience model
+### A. Deep technical case study
 
-The portfolio has three primary audiences.
+Use when the project has enough accepted evidence to sustain multiple distinct engineering stories.
 
-### A. Recruiter / first-pass reviewer
+Projects:
+- Seneca
+- WellPlot
 
-Typical need:
-- identify professional positioning quickly;
-- understand whether the work is relevant;
-- see maturity, role, technologies, and evidence without reading the whole page.
+Expected composition:
+- immediate scan layer;
+- overview;
+- 3–4 primary story chapters;
+- evidence visuals;
+- architecture/current-state material;
+- explicit limitations/current frontier;
+- artifacts/links.
 
-Design implication:
-- front-load identity, status, role, and proof;
-- use scannable headings;
-- keep cards concise;
-- do not require domain knowledge to understand why the project matters.
+### B. Compact evidence-backed project page
 
-### B. Technical hiring manager / engineering leader
+Use for strong collaborative/academic work where the public project itself already has a credible canonical presentation and the portfolio primarily needs to establish technical signal and Carlos's role.
 
-Typical need:
-- assess technical judgment;
-- understand constraints and trade-offs;
-- distinguish implementation from claims;
-- see how Carlos handled failure, ambiguity, and iteration.
+Projects:
+- Coding Rabbit
+- Flight Sentry
 
-Design implication:
-- expose technical story chapters;
-- include alternatives, decisions, evidence, and limitations;
-- link to repositories, reports, benchmarks, and demos.
+Expected composition:
+- immediate scan layer;
+- short project/team context;
+- 2–4 evidence facts;
+- compact technical approach;
+- **My contribution**;
+- one primary visual or architecture/result graphic;
+- strongest external project links;
+- concise attribution/limitations note.
 
-### C. Domain / consulting prospect
+These pages are not required to use StoryChapters.
 
-Typical need:
-- see whether Carlos understands real operational problems;
-- determine whether the work can transfer to industrial settings;
-- understand deployment and evidence boundaries.
+### C. In-progress preview page
 
-Design implication:
-- connect technical decisions to operational constraints;
-- avoid generic ML framing when domain context matters;
-- be explicit about what is proven and what remains research.
+Use for substantial active work that deserves portfolio visibility but has not yet completed the same research/content-selection cycle as the flagship case studies.
 
-## 3. Page hierarchy
+Projects:
+- Tension Modeling
+- Relay
 
-### 3.1 Homepage
+Expected composition for first implementation:
+- immediate scan layer;
+- what exists now;
+- why the problem matters;
+- current technical direction;
+- current frontier / what remains unproven;
+- repository/evidence links where appropriate.
+
+Do not manufacture a deep case study merely to make these pages match Seneca and WellPlot.
+
+## 3. Audience model
+
+### Recruiter / first-pass reviewer
+
+Needs:
+- professional positioning quickly;
+- relevance;
+- maturity;
+- role;
+- strongest evidence.
+
+Design response:
+- front-load identity/status/role;
+- use concise cards;
+- surface evidence without requiring a deep read.
+
+### Technical hiring manager / engineering leader
+
+Needs:
+- technical judgment;
+- constraints and trade-offs;
+- evidence quality;
+- boundaries between implementation and claims.
+
+Design response:
+- deep chapters on Seneca/WellPlot;
+- visible evidence and rejected approaches;
+- precise attribution;
+- current-frontier sections.
+
+### Domain / consulting prospect
+
+Needs:
+- evidence that Carlos understands operational/scientific context;
+- distinction between prototype, accepted engineering, and production validation.
+
+Design response:
+- connect technical decisions to domain constraints;
+- preserve limits explicitly;
+- prioritize real project outputs over generic AI imagery.
+
+## 4. Site hierarchy
+
+### 4.1 Homepage
 
 Recommended order:
 
 1. Hero / positioning
-2. Featured — four project cards in a responsive 2×2 desktop grid
-3. Professional context — concise domain/AI bridge
-4. In Progress — compact cards
-5. Experience
+2. Featured — four cards, responsive 2×2 desktop grid
+3. Professional context / domain-to-AI bridge
+4. In Progress — three compact cards
+5. Selected experience
 6. Education
 7. Contact
 
-Featured cards:
+Featured:
 - Seneca
 - WellPlot — Phase 1
-- CodingRabbit
+- Coding Rabbit
 - Flight Sentry
 
-In-progress cards:
+In Progress:
 - WellPlot — Phase 2
 - Tension Modeling
 - Relay
 
-MIDS is not expanded on the homepage.
+The homepage does not expand the full MIDS collection.
 
-### 3.2 Work index
+### 4.2 Work index
 
 Sections:
+
 1. Featured
 2. In Progress
 3. UC Berkeley MIDS — Selected Work
 
-Repeated cards are allowed.
+Repeated cards are allowed because cards are navigation placements, not duplicate project identities.
 
-### 3.3 Canonical project pages
+Coding Rabbit and Flight Sentry appear in:
+- Featured
+- MIDS
 
-Canonical project pages remain unique.
+WellPlot appears as:
+- Featured card → Phase 1 anchor
+- In Progress card → Phase 2 anchor
+- one canonical project page
 
-- CodingRabbit → one page
-- Flight Sentry → one page
-- Seneca → one page
-- WellPlot → one page, Phase 1 + Phase 2
-- Tension Modeling → one page
-- Relay → one page
+### 4.3 Canonical project pages
 
-## 4. Immediate scan layer
+Canonical pages:
+- Seneca
+- WellPlot
+- Coding Rabbit
+- Flight Sentry
+- Tension Modeling
+- Relay
 
-Every full project page begins with a compact scan layer.
+No duplicate WellPlot page.
 
-Required elements:
-- project title;
+## 5. Professional positioning
+
+Primary site positioning:
+
+**Applied AI & Computational Engineering**
+
+Supporting domain line:
+
+**Energy · Subsurface · Industrial AI**
+
+The site should make clear that Carlos's AI/ML work sits on top of an engineering and subsurface background rather than replacing it.
+
+Avoid generic positioning such as:
+- AI enthusiast;
+- innovation leader;
+- cutting-edge technologist;
+- generic full-stack AI engineer.
+
+## 6. Canonical project / placement data model
+
+The current `src/data/projects.ts` model is too rigid because it assumes:
+- one collection;
+- one maturity;
+- one card;
+- one fixed detail-page sequence;
+- no project phases.
+
+Implementation should move toward this conceptual model:
+
+```text
+Project
+  id
+  slug
+  family
+  title
+  short_title
+  description
+  detail_mode              # deep | compact | preview
+  status_label
+  status_detail
+  role
+  team_context
+  dates
+  technologies[]
+  links[]
+  collections[]
+  evidence_facts[]
+  media[]
+  sections[]
+  phases[]                  # optional
+  source_refs[]
+
+ProjectPhase
+  id
+  label
+  anchor
+  status
+  summary
+  what_exists[]
+  evidence_refs[]
+  limitations[]
+  current_frontier
+
+ProjectCardPlacement
+  id
+  project_id
+  collection               # featured | in_progress | mids
+  title
+  summary
+  status
+  phase_anchor              # optional
+  priority
+  visual_variant
+
+ProjectSection
+  kind                      # overview | story | architecture | contribution |
+                            # evidence | current_status | roadmap | artifacts
+  heading
+  body
+  evidence_refs[]
+  media[]
+  phase_id                  # optional
+
+EvidenceRecord
+  id
+  project_id
+  kind
+  value
+  label
+  detail
+  scope
+  provenance
+  source
+  date
+  team_or_individual
+  caveat
+```
+
+The implementation does not need to reproduce these names literally, but it must preserve these separations.
+
+## 7. Immediate scan layer
+
+Every canonical project page begins with:
+
+- title;
 - one-sentence description;
 - maturity/status;
 - Carlos's role;
@@ -120,40 +283,316 @@ Required elements:
 - date range;
 - strongest links;
 - 2–4 evidence facts;
-- technologies, kept secondary.
+- technologies as secondary metadata.
 
-Evidence facts must be useful rather than decorative.
+Evidence facts should provide real information.
 
-Good examples:
-- "31M flight records"
-- "PyPI package + LAS/DLIS"
-- "53/53 canonical FEM runtime checks"
-- "B4 cold-start: 10/10 questions passed"
-- "32-source / 100 MiB supported Seneca reference envelope"
+Prefer:
+- `PyPI · LAS/DLIS`
+- `20/20 valid · 4/20 semantic`
+- `31M flight records — team dataset`
+- `47/57 executable semantic — bounded WELL-IR experiment`
 
-Avoid:
-- line counts;
-- commit counts;
-- number of frameworks;
-- inflated "1000+ tests" claims without relevance.
+Avoid decorative counts such as total commits or lines of code.
 
-## 5. Story chapter contract
+## 8. Seneca — accepted page design
 
-### 5.1 Purpose
+**Detail mode:** deep technical case study  
+**Collection:** Featured
 
-Project pages should not be written as one long chronological history or as a generic Challenge/Solution/Impact template.
+Research baseline:
+- `SENECA-PORTFOLIO-RESEARCH-IR-003` — ACCEPT
 
-Instead, each project contains a small number of **story chapters**.
+Human-selected chapters:
 
-A story chapter records one meaningful engineering tension and how it was resolved, rejected, or left open.
+1. `ST-GL-01` — expert annotation constraint → Gold Lab
+2. `ST-RET-01` — query formulation / retrieval experiment
+3. `ST-GEN-01` — provenance-prompt regression / non-promotion
+4. `ST-CPU-16K` — GPU/CPU runtime, parity and backend qualification
 
-Each chapter should be independently understandable and reusable later as:
-- a LinkedIn post;
-- an interview story;
-- a presentation slide sequence;
-- a section of the project page.
+Preferred narrative arc:
 
-### 5.2 Story chapter fields
+1. A real user's constraint changed the product.
+2. Retrieval experiments changed what appeared to matter.
+3. A seemingly better generation prompt produced worse measured citation behavior.
+4. Runtime qualification required both performance and vector-space equivalence.
+
+Secondary material:
+- recovery;
+- security;
+- browser ingestion;
+- general latency.
+
+These may appear as evidence callouts or interview/social material, not additional primary page chapters.
+
+Visual priorities:
+- Gold Lab / training UI capture;
+- retrieval comparison;
+- citation-recall comparison;
+- CUDA/QINT8/FP32 runtime/parity figure.
+
+Until real UI captures are available, use evidence-derived diagrams/plots rather than synthetic screenshots.
+
+## 9. WellPlot — accepted page design
+
+**Detail mode:** deep technical case study  
+**Collections:** Featured via Phase 1; In Progress via Phase 2  
+**Canonical pages:** one
+
+Research baseline:
+- `WELLPLOT-PORTFOLIO-RESEARCH-IR-002` — ACCEPT
+
+Human-selected chapters:
+
+1. `ST-01` — Scientific software first
+2. `ST-02` — ~80 MCP decisions → semantic compiler
+3. `ST-03` — 20/20 valid, 4/20 scientifically correct
+4. `ST-05` — Debug the contract before blaming the model
+
+Page structure:
+
+### Phase 1 — Released deterministic scientific product
+
+Use `ST-01`.
+
+Show:
+- LAS/DLIS/programmatic input;
+- typed dataset/document architecture;
+- YAML/Python authoring;
+- Matplotlib/Plotly outputs;
+- real CBL/VDL project renders;
+- public package/release links.
+
+### Phase 2 — Semantic / NL authoring R&D
+
+Use:
+- `ST-02`
+- `ST-03`
+- `ST-05`
+
+Integrate `ST-04` as the architecture principle:
+- model owns bounded semantic interpretation;
+- host owns IDs, source resolution, mutation, persistence, rendering and verification.
+
+Use `ST-07` as a supporting callout:
+- stable passes 4/24 → 16/24;
+- still rejected because the declared promotion contract was not met.
+
+Use `ST-06` as optional secondary research:
+- compact-model / 6 GB GPU work;
+- not a primary chapter.
+
+### Roadmap
+
+Use `ST-08` only as a short closing section.
+
+Clearly label future UI/QC/processing/petrophysical ambitions as owner intent, not implemented capability.
+
+Card targets:
+- Featured `WellPlot — Phase 1` → `/portfolio/wellplot#phase-1`
+- In Progress `WellPlot — Phase 2` → `/portfolio/wellplot#phase-2`
+
+## 10. Coding Rabbit — compact page design
+
+**Detail mode:** compact evidence-backed project  
+**Collections:** Featured, MIDS  
+**Context:** five-person UC Berkeley MIDS capstone
+
+Primary external sources:
+- `https://www.codingrabbit.dev/`
+- Berkeley MIDS capstone page supplied by Carlos
+
+The project site should be treated as a primary public presentation surface rather than recreated inside the portfolio.
+
+Portfolio page purpose:
+- explain what the project is;
+- show why it is technically distinct;
+- establish Carlos's contribution;
+- send interested readers to the full project site/Berkeley page.
+
+Recommended sections:
+
+### Project snapshot
+
+A deployed AI teaching assistant for programming courses designed around guided learning rather than direct answer generation.
+
+### Team / academic context
+
+Five-person UC Berkeley MIDS capstone.
+
+Use `we` for team-level claims.
+
+### Technical signal
+
+Compact summary of:
+- VS Code learning workflow;
+- AWS deployment/application architecture;
+- course/context grounding;
+- evaluation and safety/guardrail work.
+
+### My contribution
+
+Use precise role evidence already established in portfolio architecture/project materials:
+- infrastructure/AWS backend;
+- application workflows;
+- professor/admin surfaces;
+- evaluation infrastructure/dashboard;
+- UI/presentation contributions where supported.
+
+Do not imply ownership of every retrieval, guardrail or modeling component.
+
+### Links
+
+Prominent:
+- Coding Rabbit site
+- Berkeley capstone page
+- demo / repository if still appropriate
+
+### Evidence policy
+
+Use only a small number of metrics if their source and limitations are clear.
+
+Do not make causal long-term learning claims from small/self-reported or automated evaluation results.
+
+## 11. Flight Sentry — compact page design
+
+**Detail mode:** compact evidence-backed project  
+**Collections:** Featured, MIDS  
+**Context:** collaborative UC Berkeley MIDS Machine Learning at Scale project
+
+Primary public source:
+- `https://groups.ischool.berkeley.edu/flight_delay_prediction_model/`
+
+The portfolio should summarize the Berkeley-hosted project rather than reconstruct its full development history.
+
+Recommended sections:
+
+### Project snapshot
+
+Large-scale flight-delay prediction using U.S. flight and NOAA weather data under a pre-departure information boundary.
+
+### Scale / method
+
+Where supported by the Berkeley/team material:
+- approximately 31M domestic-flight records;
+- PySpark / Databricks;
+- temporal validation;
+- team exploration of classification, regression and multiple model families.
+
+### My contribution
+
+Keep contribution bounded to established team attribution:
+- custom data join;
+- MLP/CNN experiments.
+
+Do not attribute the final ensemble to Carlos individually.
+
+### Team result
+
+Team-level final metrics may be shown only with explicit team attribution and original evaluation context.
+
+### Links / visual
+
+Use:
+- Berkeley project site as the primary destination;
+- one project-derived architecture/result graphic or screenshot where licensing/source context is clear.
+
+No deep StoryChapter cycle is required for first implementation.
+
+## 12. Tension Modeling — first-pass preview design
+
+**Detail mode:** in-progress preview  
+**Collection:** In Progress
+
+The first website candidate should not wait for the full Tension research program to finish.
+
+Required page content:
+- physics-based wireline tension/friction problem;
+- soft-string/inverse-method context;
+- current FEM/contact work;
+- reproducibility/scientific-runtime discipline;
+- explicit current frontier.
+
+Do not claim:
+- solved contact mechanics;
+- validated production physics;
+- physical correctness merely from numerical convergence.
+
+A later research cycle can upgrade this page into a deep case study without changing its canonical slug.
+
+## 13. Relay — first-pass preview design
+
+**Detail mode:** in-progress preview  
+**Collection:** In Progress
+
+Required page content:
+- governance/control-plane problem for agentic development;
+- durable authority/evidence/replay concepts;
+- current dogfood evidence;
+- current boundary: full autonomous real-project loop is not yet a completed production claim.
+
+For the first implementation, keep the page shorter than Seneca/WellPlot.
+
+A later accepted research package may promote Relay to a deeper case study.
+
+## 14. Project cards
+
+### Featured cards
+
+Desktop:
+- responsive 2×2 grid;
+- equal visual weight;
+- concise text;
+- visible maturity;
+- no giant alternating full-width cards.
+
+Each card should communicate:
+- what it is;
+- Carlos's role;
+- strongest technical signal;
+- status;
+- one useful visual.
+
+### In-progress cards
+
+More compact than Featured.
+
+Must show:
+- what already exists;
+- current frontier/status;
+- no “coming soon” vagueness.
+
+### MIDS cards
+
+Compact academic treatment.
+
+Coding Rabbit and Flight Sentry may repeat here and link to the same canonical pages.
+
+## 15. Flexible page renderer
+
+The current `[slug].astro` page hard-codes one case-study sequence.
+
+Replace that with section-driven rendering.
+
+Minimum section variants required for first implementation:
+- `overview`
+- `story`
+- `architecture`
+- `contribution`
+- `evidence`
+- `current_status`
+- `roadmap`
+- `artifacts`
+
+Not every page uses every section.
+
+WellPlot sections may carry a phase anchor.
+
+Coding Rabbit and Flight Sentry should render naturally without empty placeholder sections.
+
+## 16. Story chapter contract
+
+Story chapters remain the canonical reusable narrative unit for deep pages.
 
 ```text
 StoryChapter
@@ -175,520 +614,187 @@ StoryChapter
   social_angle
 ```
 
-Not every chapter needs every field, but a publishable chapter must contain:
-- a real situation;
-- a meaningful constraint/tension;
-- a decision or explicit non-decision;
+A publishable chapter requires:
+- real situation;
+- meaningful technical tension;
+- decision or explicit non-decision;
 - evidence;
-- a conclusion or lesson.
+- judgment;
+- boundary where material.
 
-### 5.3 Narrative sequence
+Compact academic pages are exempt from this requirement.
 
-Default sequence:
+## 17. Evidence presentation
 
-1. **Opening fact** — the concrete observation that makes the chapter worth reading.
-2. **Situation** — enough context to understand the engineering problem.
-3. **Tension** — what made the obvious answer insufficient.
-4. **Decision** — what was tried, chosen, rejected, or frozen.
-5. **Evidence** — what the test, measurement, user behavior, or implementation showed.
-6. **Judgment** — what the result changed in the project.
-7. **Boundary** — what the result still does not establish.
+### Evidence strip
 
-This sequence is intentionally closer to an engineering decision record and a postmortem than to marketing copy.
+Near the top of deep and compact project pages, show 2–4 useful evidence facts.
 
-## 6. Storytelling rules
+Every metric must retain:
+- denominator/population when material;
+- team vs individual attribution;
+- development/pilot/accepted status;
+- relevant caveat.
 
-### 6.1 Start with the interesting fact, not the project history
+### Chapter evidence
 
-Prefer:
-"One version of the FEM model converged numerically and still produced an invalid physical result."
+May use:
+- project screenshots;
+- real scientific renders;
+- architecture diagrams;
+- experimental comparison plots;
+- benchmark figures;
+- acceptance/evidence diagrams.
 
-Avoid:
-"Tension Modeling is an innovative project designed to explore..."
+Each visual must have a narrative job.
 
-### 6.2 Preserve uncertainty
+## 18. Visual design
 
-A good technical story may end with:
-- a rejected approach;
-- a narrower claim;
-- an unresolved question;
-- a decision to defer work.
+Preserve the restrained engineering identity of the current site:
+- light neutral backgrounds;
+- dark technical typography;
+- restrained teal/orange accent system;
+- strong whitespace;
+- real artifacts.
 
-This is evidence of judgment, not failure of storytelling.
-
-### 6.3 Show alternatives when they mattered
-
-If several real options were considered, name them.
-
-Example:
-- dense only;
-- hybrid;
-- reranking;
-- context expansion.
-
-Or:
-- CUDA;
-- ONNX CPU;
-- llama.cpp / GGUF feasibility.
-
-Do not fabricate alternatives merely to create drama.
-
-### 6.4 Separate team result from individual contribution
-
-Each collaborative story must distinguish:
-- what the team achieved;
-- Carlos's direct role;
-- what another teammate owned where relevant.
-
-### 6.5 Use failures selectively
-
-Not every defect deserves a story.
-
-A failure is story-worthy when it changed:
-- architecture;
-- methodology;
-- acceptance criteria;
-- understanding of the problem;
-- operational design.
-
-### 6.6 Do not manufacture a hero narrative
+Improve:
+- card density/hierarchy;
+- phase/status badges;
+- evidence presentation;
+- responsive Featured grid;
+- section rhythm;
+- visual differentiation between deep, compact and preview pages.
 
 Avoid:
-- "Against all odds..."
-- "I refused to give up..."
-- "The breakthrough came when..."
-unless the source evidence genuinely supports that framing.
+- decorative AI artwork;
+- stock engineering imagery;
+- excessive gradients/animation;
+- “AI dashboard” aesthetics unrelated to the actual projects.
 
-The subject is the engineering decision, not Carlos as protagonist.
+## 19. Editorial voice
 
-## 7. Evidence presentation
-
-### 7.1 Evidence strip
-
-Near the top of each project page, render 2–4 evidence facts.
-
-Each fact should include a short qualifier if needed.
-
-Example:
-
-```text
-31M
-flight records
-Team dataset
-
-0.697
-F2
-Final team evaluation
-
-Custom join
-Carlos's contribution
-PySpark feature pipeline
-```
-
-### 7.2 Evidence blocks inside chapters
-
-Evidence may be:
-- metric table;
-- screenshot;
-- rendered log;
-- benchmark plot;
-- architecture diagram;
-- acceptance record;
-- test summary;
-- before/after comparison;
-- excerpt from a public project report.
-
-Each visual should have:
-- caption;
-- what it demonstrates;
-- scope/limitation where material.
-
-### 7.3 Evidence ledger
-
-Project data should maintain evidence records separately from prose.
-
-Conceptual model:
-
-```text
-EvidenceRecord
-  id
-  project_id
-  kind
-  value
-  label
-  scope
-  provenance
-  source_url_or_repo_ref
-  date
-  team_or_individual
-  caveat
-```
-
-Story chapters reference evidence IDs.
-
-This prevents the same metric from acquiring different wording or scope across the website and social posts.
-
-## 8. Social-media derivative design
-
-### 8.1 Principle
-
-Do not write LinkedIn posts first and then retrofit them into the portfolio.
-
-Write one canonical engineering chapter and derive a shorter social version.
-
-### 8.2 Social chapter format
-
-A normal LinkedIn post should usually represent one story chapter.
-
-Suggested structure:
-
-```text
-Opening observation
-2–4 short paragraphs of context
-The decision / experiment
-Concrete evidence
-What I changed / learned
-Optional question or link to the full project page
-```
-
-The post should stand alone. A reader should not need to have seen "Part 1".
-
-### 8.3 Series size
-
-Do not force every project into the same number of posts.
-
-Recommended upper bounds:
-- Featured project: 2–4 strong posts;
-- active R&D project: 2–5 posts over time;
-- smaller MIDS project: usually 1 post or a grouped academic post.
-
-A project with only one genuinely interesting engineering story gets one post.
-
-### 8.4 Series labels
-
-Use subtle continuity, not aggressive serial branding.
-
-Good:
-- "Building Seneca — retrieval was not the slow part."
-- "WellPlot Phase 2 — the frontier-model experiment taught us the wrong lesson."
-- "Tension Modeling — convergence was not enough."
-
-Avoid:
-- "🚀 AI BUILD SERIES PART 1/10"
-- forced cliffhangers;
-- "Like and follow for Part 2";
-- identical hook formulas.
-
-### 8.5 Format selection
+Target:
+- technically literate;
+- direct;
+- conversational;
+- academically professional.
 
 Use:
-- text + one real screenshot/figure for a focused engineering lesson;
-- PDF/document carousel when a visual sequence genuinely helps;
-- article for a deeper single topic that cannot fit comfortably in a feed post;
-- newsletter only if a coherent recurring theme and cadence later justify it.
-
-The website remains canonical even if a LinkedIn article is longer than a post.
-
-### 8.6 Analytics feedback loop
-
-Track:
-- impressions;
-- profile activity;
-- saves/sends where available;
-- comments with substantive questions;
-- viewer demographics where useful.
-
-Use this to learn which technical stories resonate.
-
-Do not rewrite technical claims to chase engagement.
-
-## 9. Recommended story inventory by project
-
-These are design candidates, not final copy.
-
-### Seneca
-
-Potential chapters:
-
-1. **Local by design**
-   - Why the generator lives outside the application container.
-   - Model independence, privacy, deployment trade-off.
-
-2. **A RAG system needs its own measurement system**
-   - Retrieval and generation evaluated separately.
-   - Gold authoring, citations, abstention, security.
-
-3. **The beta corpus broke the comfortable assumptions**
-   - 45 files / ~1.05 GB exposed performance and reliability issues beyond the earlier supported envelope.
-   - What changed in ingestion/capacity work.
-
-4. **CPU fallback was a correctness problem before it was a speed problem**
-   - CUDA vs ONNX / quantized alternatives.
-   - Numerical parity and performance gates.
-
-Optional fifth:
-5. **When recovery should remain disabled**
-   - evidence was insufficient to justify recovery/orchestration;
-   - complexity had to earn its place.
-
-### WellPlot
-
-One page, two phases.
-
-#### Phase 1 candidates
-
-1. **Treat the well log as an engineering document**
-   - renderer-first architecture;
-   - data model separate from presentation;
-   - LAS/DLIS, printable and interactive outputs.
-
-2. **A real CBL/VDL layout forced the abstraction to become honest**
-   - array/raster channels, micro-time axes, fills, overlays, annotations;
-   - real domain requirements shaping API design.
-
-3. **From library to usable tooling**
-   - packaging, PyPI/docs, bounded MCP/API interfaces.
-
-#### Phase 2 candidates
-
-4. **The best models were answering the wrong question**
-   - frontier-model screening methodology failure;
-   - comparing invented representations against ground truth was not sufficient.
-
-5. **Structure before model size**
-   - lessons from CW/TW experiments;
-   - constrained IR, deterministic lowering, semantic qualification.
-
-6. **Provider-free tests can prove plumbing, not model capability**
-   - 9/9 rehearsal and request-control evidence;
-   - live model qualification remains a separate claim.
-
-### CodingRabbit
-
-Potential chapters:
-
-1. **A tutoring assistant has a different objective from a coding assistant**
-   - learning vs answer generation;
-   - instructional constraints.
-
-2. **My part of the system**
-   - AWS/backend/application ownership;
-   - Cognito, deployment, data workflows, professor/admin UI.
-
-3. **Evaluation had to be separated from live tutoring**
-   - offline evaluation lane;
-   - metrics and their limits.
-
-Possible fourth only if evidence supports a strong story:
-4. **What the pilot actually showed**
-   - confidence and automated evaluation;
-   - avoid causal learning claims.
-
-### Flight Sentry
-
-Potential chapters:
-
-1. **The join was part of the ML problem**
-   - 31M flights + weather;
-   - point-in-time correctness / leakage constraints;
-   - Carlos's custom data join contribution.
-
-2. **Classification looked obvious; regression worked better**
-   - team modeling evolution;
-   - architecture simplification;
-   - final ensemble result.
-
-3. **What large-scale ML changed about experimentation**
-   - Spark/Databricks;
-   - temporal cross-validation;
-   - feature and compute constraints.
-
-Optional:
-4. **MLP/CNN experiments in tabular/time-dependent data**
-   - Carlos's experiments;
-   - what they contributed even if not in final ensemble.
-
-### Tension Modeling
-
-Potential chapters:
-
-1. **Why friction cannot simply be measured**
-   - inverse problem / operational context;
-   - soft-string baseline.
-
-2. **The solver converged and the physics still failed**
-   - contact nonpenetration;
-   - why numerical convergence was rejected as acceptance.
-
-3. **Reproducibility became part of the scientific model**
-   - canonical FEM runtime;
-   - image pinning / dependency identity / 53/53 validation.
-
-4. **The current frontier**
-   - D59/D73/contact recovery path;
-   - what remains unresolved.
-
-### Relay
-
-Potential chapters:
-
-1. **Agents make reasonable changes that can still move the project in the wrong direction**
-   - governance problem;
-   - authority and scope drift.
-
-2. **Authority has to survive the chat**
-   - durable state, immutable records, replay.
-
-3. **Cold start was the first real test**
-   - fresh operator;
-   - 10/10 questions;
-   - no prior conversation.
-
-4. **Why successful agent execution is not enough**
-   - runtime/roles/context/workspace;
-   - acceptance and promotion separation.
-
-Future chapter:
-5. **First governed real-project execution**
-   - only after it actually exists.
-
-## 10. Project-page composition
-
-Each project page may use:
-
-### Header
-Immediate scan layer.
-
-### Overview
-2–4 paragraphs maximum.
-
-### Story chapters
-2–6, depending on project depth.
-
-Each chapter:
-- clear factual heading;
-- 2–5 paragraphs;
-- evidence visual(s);
-- optional decision box;
-- explicit caveat only when necessary.
-
-### Evidence / artifacts
-A compact index of:
-- repository;
-- demo;
-- documentation;
-- report;
-- benchmark;
-- accepted evidence.
-
-### Current status
-For active R&D:
-- what works;
-- what is being validated;
-- what is not claimed.
-
-### Next project
-Navigation only.
-
-## 11. Writing mechanics
-
-Use active voice by default.
-
-Prefer:
-"I changed the evaluation after the frontier-model run exposed a flaw in the methodology."
+- concrete facts;
+- first person for individual contribution;
+- `we` for collaborative team work;
+- explicit limitations;
+- normal sentence rhythm.
 
 Avoid:
-"A change in evaluation methodology was implemented after flaws were identified."
+- generic Challenge/Solution/Impact headings;
+- “leveraging cutting-edge AI”;
+- “at the intersection of”;
+- “revolutionary”;
+- repeated rhetorical triads;
+- forcing every project into a heroic arc.
 
-Paragraph rhythm:
-- mix short and medium sentences;
-- avoid identical paragraph lengths;
-- avoid three-item rhetorical symmetry unless naturally required;
-- technical terms are welcome when defined.
+## 20. Social derivative model
 
-Headings:
-- factual and specific;
-- often derived from the actual result.
+Deep-page accepted chapters may later become independent LinkedIn/social stories.
 
-Examples:
-- "The solver converged. The contact model did not."
-- "Why the model is outside the container"
-- "31 million flights made the join a modeling problem"
+Do not write social content first.
 
-Avoid:
-- "The Challenge"
-- "The Journey"
-- "The Solution"
-- "The Impact"
-- "Innovation in action"
+Typical limits:
+- Seneca: up to four high-value posts;
+- WellPlot: up to four;
+- Coding Rabbit: usually one strong capstone/team post;
+- Flight Sentry: usually one academic/large-scale-ML post;
+- Tension/Relay: only when a specific accepted milestone warrants it.
 
-## 12. Visual narrative design
+No mandatory Part 1/4 serialization.
 
-Every major chapter should attempt to pair with one real artifact.
+## 21. First implementation candidate scope
 
-Preferred visual classes:
-- application screenshot;
-- architecture diagram;
-- benchmark/result figure;
-- real render/output;
-- experimental comparison;
-- state/evidence diagram.
+The first website implementation should include:
 
-A project page should not become an image gallery. Each visual needs a narrative job.
+### Required
 
-For active R&D, diagrams may show the current frontier and unresolved boundary.
+- new multi-collection/card data model;
+- Featured 2×2 homepage grid;
+- In Progress homepage section;
+- Work index with Featured / In Progress / MIDS;
+- six canonical project routes;
+- one canonical WellPlot route with Phase 1/2 anchors;
+- deep Seneca page structure;
+- deep WellPlot page structure;
+- compact Coding Rabbit page;
+- compact Flight Sentry page;
+- preview Tension Modeling page;
+- preview Relay page;
+- evidence/status/role scan layer;
+- responsive behavior;
+- current restrained visual identity.
 
-## 13. Content production workflow
+### May use placeholders only for unavailable media
 
-For each project:
+Allowed:
+- clearly labeled evidence-derived diagram placeholder;
+- neutral project-art placeholder.
 
-1. retrieve the latest project evidence;
-2. build an evidence ledger;
-3. identify candidate story chapters;
-4. select only chapters with distinct technical value;
-5. draft canonical project copy;
-6. run factual/attribution review;
-7. run editorial/voice review;
-8. derive social-post outlines from accepted chapters;
-9. do not publish social derivatives before canonical project facts are accepted.
+Not allowed:
+- synthetic screenshots presented as real UI;
+- fabricated benchmark plots;
+- stock visuals pretending to be project output.
 
-## 14. Research basis
+### Not required for first implementation
 
-The design uses the following external guidance:
+- complete social content;
+- full Tension research case study;
+- full Relay research case study;
+- every Seneca UI screenshot;
+- all possible WellPlot experiment visuals;
+- redesign of contact/experience content beyond what is needed for layout consistency.
 
-- Nielsen Norman Group portfolio research: hiring managers want process, constraints, iterations, rationale, and outcomes; portfolios should be scannable.
-- Nielsen Norman Group web-reading research: readers scan and benefit from front-loaded information, meaningful headings, concise paragraphs, and plain language.
-- Google Technical Writing: define the audience, summarize important points early, and prefer active voice for clarity.
-- Architecture Decision Record practice: preserve context, considered options, decisions, rationale, and consequences.
-- Google SRE postmortem practice: use failures as structured learning, preserve evidence, and avoid blame/hero narratives.
-- LinkedIn current creator guidance: useful content should reflect real expertise, experience, perspective, and actionable learning; generic polished "AI slop" is discouraged.
-- LinkedIn publishing model: posts are feed-oriented; articles support long-form depth; newsletters work best when a clear recurring theme and cadence exist.
+## 22. Implementation acceptance questions
 
-## 15. Design review questions
+The first website candidate should be judged on:
 
-IR should specifically test:
+1. Can a recruiter identify Carlos's positioning and strongest four projects quickly?
+2. Are Featured and In Progress visibly different maturity categories?
+3. Does WellPlot read as one project with two clear maturity phases?
+4. Do Seneca and WellPlot reward deep reading without making the homepage dense?
+5. Do Coding Rabbit and Flight Sentry feel credible and substantial without inflated case-study prose?
+6. Are Carlos's collaborative contributions explicit?
+7. Do Tension and Relay look like real active work rather than empty “coming soon” pages?
+8. Are evidence facts scoped correctly?
+9. Is any future capability visually mistaken for an implemented capability?
+10. Does the site still feel like an engineering portfolio rather than a generic AI template?
 
-1. Are story chapters genuinely distinct or do they repeat the same claim?
-2. Does each chapter contain evidence?
-3. Is the individual/team attribution correct?
-4. Is any failure being dramatized beyond the evidence?
-5. Is the current frontier explicit for active R&D?
-6. Can a recruiter understand the page without reading every chapter?
-7. Can a technical reviewer go deeper without being forced into repository internals?
-8. Can each selected social chapter stand alone without "Part N" dependency?
-9. Does the prose sound like Carlos explaining engineering work rather than a marketing writer?
-10. Is any metric presented without enough context to interpret it?
+## 23. Design exit criteria
 
-## 16. Design exit criteria
+- [x] audience model defined;
+- [x] homepage/work hierarchy defined;
+- [x] immediate-scan layer defined;
+- [x] canonical project/card/phase model defined;
+- [x] deep/compact/preview page depths defined;
+- [x] story chapter contract defined;
+- [x] evidence model defined;
+- [x] social-derivative model defined;
+- [x] Seneca research and Human story selection integrated;
+- [x] WellPlot research and Human story selection integrated;
+- [x] Coding Rabbit compact treatment defined;
+- [x] Flight Sentry compact treatment defined;
+- [x] Tension first-pass treatment defined;
+- [x] Relay first-pass treatment defined;
+- [x] WellPlot one-page/two-phase composition frozen;
+- [x] first implementation candidate scope defined;
+- [x] no production Astro implementation performed.
 
-Design is ready for Independent Review when:
+## 24. Design gate
 
-- [ ] audience model is accepted;
-- [ ] homepage/work hierarchy is accepted;
-- [ ] immediate-scan layer is accepted;
-- [ ] story chapter contract is accepted;
-- [ ] evidence ledger model is accepted;
-- [ ] social-derivative model is accepted;
-- [ ] WellPlot one-page/two-phase composition is accepted;
-- [ ] initial story inventory for all six canonical projects is accepted as a starting point;
-- [ ] no production Astro implementation has been performed.
+This document is now a **Design Candidate**.
+
+Next gate:
+
+**Independent Portfolio Design Review**
+
+If accepted:
+1. Human final approval;
+2. implementation authority;
+3. first full Astro website candidate.
