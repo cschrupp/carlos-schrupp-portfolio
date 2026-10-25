@@ -18,6 +18,10 @@ export const seneca: Project = {
   accent: "teal",
   technologies: ["Python", "FastAPI", "React", "Qdrant", "Docling", "Qwen embeddings", "ONNX", "CUDA"],
   collections: ["featured"],
+  heroMeta: [
+    { label: "Status", value: "Active development product" },
+    { label: "Objective", value: "Portfolio sample · technical case study" },
+  ],
   links: [{ label: "GitHub", href: "https://github.com/cschrupp/offline-rag" }],
   facts: [
     { value: "Human Gold", label: "Evaluation authority", detail: "Machine proposals remain advisory; accepted Gold labels require human adjudication." },
