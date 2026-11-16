@@ -10,7 +10,7 @@ export const tension: Project = {
     "An active scientific-computing program for modeling deployment tension, friction and contact behavior while keeping numerical convergence separate from physical acceptance.",
   detailMode: "preview",
   role: "Project creator / scientific lead",
-  teamContext: "Independent R&D · agent-assisted implementation and review",
+  teamContext: "Independent scientific R&D",
   status: "Active scientific R&D",
   statusDetail: "Core mechanics and reproducible runtime work exist; contact-mechanics qualification remains open.",
   dates: "2026 — Present",
@@ -46,5 +46,8 @@ export const tension: Project = {
       caveat: "This page is an in-progress preview. It does not claim solved contact mechanics, production validation or a completed physics-aware ML model.",
     },
   ],
+  developmentApproach:
+    "I define the mechanics, physical acceptance conditions, experiments and research direction. Coding agents accelerate implementation and numerical investigation, but solver convergence is never accepted as physical correctness without separate review.",
+
   sourceNote: "First-pass preview based on the accepted portfolio design and current governed project state. A later research cycle may promote this into a deeper case study.",
 };

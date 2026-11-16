@@ -85,17 +85,35 @@ const heroMeta = project.heroMeta ?? [
       </div>
     </section>
 
-    <section class="case-facts" aria-label={`${project.title} evidence facts`}>
-      <div class="shell fact-grid">
-        {project.facts.map((fact) => (
-          <article>
-            <p class="fact-value">{fact.value}</p>
-            <h2>{fact.label}</h2>
-            <p>{fact.detail}</p>
-          </article>
-        ))}
-      </div>
-    </section>
+    {project.facts.length > 0 && (
+      <section class="case-facts" aria-label={`${project.title} evidence facts`}>
+        <div class="shell fact-grid">
+          {project.facts.map((fact) => (
+            <article>
+              <p class="fact-value">{fact.value}</p>
+              <h2>{fact.label}</h2>
+              <p>{fact.detail}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {project.media && project.media.length > 0 && (
+      <section class="project-gallery" aria-label={`${project.title} product screenshots`}>
+        <div class="shell">
+          <div class="project-gallery-heading">
+            <p class="eyebrow">Product interface</p>
+            <h2>The real application.</h2>
+          </div>
+          <div class="project-gallery-grid">
+            {project.media.map((visual) => (
+              <ProjectVisual project={project} visual={visual} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
 
     <div class="project-sections">
       {project.sections.map((section, index) => (
@@ -143,6 +161,18 @@ const heroMeta = project.heroMeta ?? [
         </section>
       ))}
     </div>
+
+    {project.developmentApproach && (
+      <section class="development-approach">
+        <div class="shell development-approach-grid">
+          <div>
+            <p class="eyebrow">Development approach</p>
+            <h2>Human direction, agentic implementation.</h2>
+          </div>
+          <p>{project.developmentApproach}</p>
+        </div>
+      </section>
+    )}
 
     <section class="technology-band">
       <div class="shell technology-band-grid">

@@ -10,7 +10,7 @@ export const wellplot: Project = {
     "WellPlot separates scientific data, document composition and rendering, then explores a bounded semantic compiler that can translate natural-language intent without giving the model authority over the final scientific artifact.",
   detailMode: "deep",
   role: "Project creator / product and research lead",
-  teamContext: "Independent open-source project · implementation substantially agent-assisted",
+  teamContext: "Independent open-source project",
   status: "Phase 1 released · Phase 2 active R&D",
   statusDetail:
     "The deterministic renderer is public and installable. The natural-language semantic layer remains under active qualification after its latest included live campaign failed the scientific gate.",
@@ -151,6 +151,9 @@ export const wellplot: Project = {
       ],
     },
   ],
+  developmentApproach:
+    "I define the scientific model, product architecture, evaluation questions and acceptance criteria. Coding agents handle substantial implementation, testing and repair, while scientific behavior and promotion decisions remain under explicit review.",
+
   sourceNote:
     "WellPlot content is grounded in the accepted IR-002 research package and Human story selection. Phase 1 and Phase 2 intentionally retain different maturity language.",
 };

@@ -10,7 +10,7 @@ export const relay: Project = {
     "Relay treats agentic coding as a governed engineering process rather than a sequence of chat instructions, separating authorization, execution evidence, review and promotion.",
   detailMode: "preview",
   role: "Project creator / architecture lead",
-  teamContext: "Independent R&D · dogfooded with specialized coding/review agents",
+  teamContext: "Independent R&D · dogfooded as its own governance system",
   status: "Active platform R&D",
   statusDetail: "Durable governance and dogfood workflows exist; the broader autonomous real-project execution loop remains under development.",
   dates: "2026 — Present",
@@ -47,5 +47,8 @@ export const relay: Project = {
       caveat: "This first portfolio page is intentionally a preview. It does not claim production adoption or a completed autonomous engineering platform.",
     },
   ],
+  developmentApproach:
+    "Relay is developed with the same human-directed agentic workflow it is intended to govern: explicit authority, agent execution, durable evidence, independent review and Human acceptance before promotion.",
+
   sourceNote: "First-pass preview based on the accepted Portfolio Refresh v2 design and current Relay dogfood state.",
 };

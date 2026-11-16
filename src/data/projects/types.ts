@@ -13,12 +13,21 @@ export type Accent = "teal" | "orange" | "blue" | "violet";
 export type ProjectLink = { label: string; href: string };
 export type ProjectFact = { value: string; label: string; detail: string };
 
+export type ProjectFlowStep = {
+  title: string;
+  detail?: string;
+};
+
 export type ProjectVisual = {
-  type: "image" | "diagram";
+  type: "image" | "diagram" | "flow";
   src?: string;
   alt: string;
   caption?: string;
   labels?: string[];
+  heading?: string;
+  subheading?: string;
+  steps?: ProjectFlowStep[];
+  feedback?: string;
 };
 
 export type ProjectSection = {
@@ -73,8 +82,10 @@ export type Project = {
   links: ProjectLink[];
   facts: ProjectFact[];
   visual: ProjectVisual;
+  media?: ProjectVisual[];
   phases?: ProjectPhase[];
   heroMeta?: ProjectHeroMeta[];
+  developmentApproach?: string;
   sections: ProjectSection[];
   sourceNote: string;
 };
