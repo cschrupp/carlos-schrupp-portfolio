@@ -7,7 +7,7 @@ export const flightSentry: Project = {
   eyebrow: "UC Berkeley MIDS · ML at Scale",
   summary: "Large-scale flight-delay prediction using flight and weather data available before departure.",
   description:
-    "A collaborative Berkeley project that joined roughly 31 million domestic-flight records with weather data under a strict point-in-time prediction boundary.",
+    "A collaborative Berkeley project that joined roughly 31 million domestic-flight records with weather data using only information available before departure.",
   detailMode: "compact",
   role: "Custom data join · MLP/CNN experiments",
   teamContext: "UC Berkeley MIDS Machine Learning at Scale team project",
@@ -40,7 +40,7 @@ export const flightSentry: Project = {
       title: "Point-in-time data joining and neural-network experiments",
       bullets: [
         "Built part of the custom distributed join that aligned flight and weather data at large scale.",
-        "Worked within the pre-departure information boundary so later weather or flight outcomes did not leak into training features.",
+        "Kept later weather and flight outcomes out of the training features so the model used only information available before departure.",
         "Implemented MLP and CNN experiments as part of the team's model comparison.",
         "Contributed those experiments to the broader team workflow; the final ensemble and headline metrics are team results.",
       ],
