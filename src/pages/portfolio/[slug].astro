@@ -4,196 +4,89 @@ import ProjectVisual from "../../components/ProjectVisual.astro";
 import { projects, type Project } from "../../data/projects";
 import { withBase } from "../../lib/paths";
 
+const publicProjects = projects.filter((project) => project.detailMode !== "preview");
+
 export function getStaticPaths() {
-  return projects.map((project) => ({
-    params: { slug: project.slug },
-    props: { project },
-  }));
+  return publicProjects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
 }
 
-interface Props {
-  project: Project;
-}
+interface Props { project: Project; }
 
 const { project } = Astro.props;
-const currentIndex = projects.findIndex((item) => item.slug === project.slug);
-const nextProject = projects[(currentIndex + 1) % projects.length];
-const heroMeta = project.heroMeta ?? [
-  { label: "Status", value: project.status },
-  { label: "Role", value: project.role },
-  { label: "Context", value: project.teamContext },
-  { label: "Dates", value: project.dates },
-  {
-    label: "Depth",
-    value:
-      project.detailMode === "deep"
-        ? "Technical case study"
-        : project.detailMode === "compact"
-          ? "Compact project page"
-          : "In-progress preview",
-  },
-];
+const currentIndex = publicProjects.findIndex((item) => item.slug === project.slug);
+const nextProject = publicProjects[(currentIndex + 1) % publicProjects.length];
 ---
 
 <BaseLayout title={`${project.title} — Carlos Schrupp`} description={project.description}>
   <article class:list={["project-page", `accent-${project.accent}`, `detail-${project.detailMode}`]}>
-    <header class="case-hero">
+    <header class:list={["case-hero", { "has-visual": Boolean(project.visual) }]}>
       <div class="shell">
         <a class="breadcrumb" href={withBase("/portfolio")}><span aria-hidden="true">←</span> Portfolio</a>
         <div class="case-hero-grid">
-          <div>
+          <div class="case-hero-copy">
             <p class="eyebrow">{project.eyebrow}</p>
             <h1>{project.title}</h1>
             <p class="case-summary">{project.summary}</p>
-            <p class="case-description">{project.description}</p>
             <div class="project-links">
               {project.links.map((link, index) => (
-                <a
-                  class:list={["button", index === 0 ? "button-primary" : "button-secondary"]}
-                  href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {link.label}<span aria-hidden="true">↗</span>
-                </a>
+                <a class:list={["button", index === 0 ? "button-primary" : "button-secondary"]} href={link.href} target="_blank" rel="noreferrer">{link.label}<span aria-hidden="true">↗</span></a>
               ))}
             </div>
           </div>
-          <dl class="case-meta">
-            {heroMeta.map((item) => (
-              <div><dt>{item.label}</dt><dd>{item.value}</dd></div>
-            ))}
-          </dl>
+          {project.visual && <div class="case-hero-media"><ProjectVisual visual={project.visual} eager /></div>}
         </div>
+        <dl class="case-snapshot">
+          <div><dt>What</dt><dd>{project.description}</dd></div>
+          <div><dt>My role</dt><dd>{project.role}</dd></div>
+          <div><dt>Status</dt><dd>{project.statusDetail}</dd></div>
+        </dl>
         {project.phases && (
           <nav class="phase-nav" aria-label={`${project.title} phases`}>
             {project.phases.map((phase) => (
-              <a href={`#${phase.id}`}>
-                <span>{phase.status}</span>
-                <strong>{phase.label}</strong>
-                <small>{phase.summary}</small>
-              </a>
+              <a href={`#${phase.id}`}><span>{phase.status}</span><strong>{phase.label}</strong><small>{phase.summary}</small></a>
             ))}
           </nav>
         )}
       </div>
     </header>
 
-    <section class="case-media">
-      <div class="shell">
-        <ProjectVisual project={project} />
-      </div>
-    </section>
-
     {project.facts.length > 0 && (
-      <section class="case-facts" aria-label={`${project.title} evidence facts`}>
+      <section class="case-facts" aria-label={`${project.title} key numbers`}>
         <div class="shell fact-grid">
-          {project.facts.map((fact) => (
-            <article>
-              <p class="fact-value">{fact.value}</p>
-              <h2>{fact.label}</h2>
-              <p>{fact.detail}</p>
-            </article>
-          ))}
+          {project.facts.map((fact) => <article><p class="fact-value">{fact.value}</p><h2>{fact.label}</h2><p>{fact.detail}</p></article>)}
         </div>
       </section>
     )}
 
     {project.media && project.media.length > 0 && (
       <section class="project-gallery" aria-label={`${project.title} product screenshots`}>
-        <div class="shell">
-          <div class="project-gallery-heading">
-            <p class="eyebrow">Product interface</p>
-            <h2>The real application.</h2>
-          </div>
-          <div class="project-gallery-grid">
-            {project.media.map((visual) => (
-              <ProjectVisual project={project} visual={visual} />
-            ))}
-          </div>
-        </div>
+        <div class="shell project-gallery-grid">{project.media.map((visual) => <ProjectVisual visual={visual} />)}</div>
       </section>
     )}
 
     <div class="project-sections">
-      {project.sections.map((section, index) => (
-        <section
-          id={section.id}
-          class:list={[
-            "case-section",
-            `section-kind-${section.kind}`,
-            { "case-section-tinted": index % 2 === 1 },
-            { "case-section-dark": section.kind === "contribution" },
-          ]}
-        >
-          <div class="shell case-two-column">
-            <div class="case-section-heading">
-              {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
-              <h2>{section.title}</h2>
-              {section.opening && <p class="section-opening">{section.opening}</p>}
-            </div>
-            <div class="case-section-body">
-              {section.paragraphs?.map((paragraph) => <p class="large-prose">{paragraph}</p>)}
-              {section.bullets && (
-                <ul class:list={["section-list", { "contribution-list": section.kind === "contribution" }]}>
-                  {section.bullets.map((item) => <li>{item}</li>)}
-                </ul>
-              )}
-              {section.facts && (
-                <div class="inline-facts">
-                  {section.facts.map((fact) => (
-                    <article>
-                      <strong>{fact.value}</strong>
-                      <span>{fact.label}</span>
-                      <p>{fact.detail}</p>
-                    </article>
-                  ))}
-                </div>
-              )}
-              {section.caveat && (
-                <aside class="caveat">
-                  <strong>Boundary</strong>
-                  <p>{section.caveat}</p>
-                </aside>
-              )}
-            </div>
+      {project.sections.map((section) => (
+        <section id={section.id} class:list={["case-section", `section-kind-${section.kind}`]}>
+          <div class="case-reading-column">
+            {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+            <h2>{section.title}</h2>
+            {section.opening && <p class="section-opening">{section.opening}</p>}
+            {section.paragraphs?.map((paragraph) => <p class="large-prose">{paragraph}</p>)}
+            {section.bullets && <ul class="section-list">{section.bullets.map((item) => <li>{item}</li>)}</ul>}
+            {section.code && <pre class="code-sample"><code>{section.code}</code></pre>}
+            {section.facts && <div class="inline-facts">{section.facts.map((fact) => <article><strong>{fact.value}</strong><span>{fact.label}</span><p>{fact.detail}</p></article>)}</div>}
           </div>
         </section>
       ))}
     </div>
 
-    {project.developmentApproach && (
-      <section class="development-approach">
-        <div class="shell development-approach-grid">
-          <div>
-            <p class="eyebrow">Development approach</p>
-            <h2>Human direction, agentic implementation.</h2>
-          </div>
-          <p>{project.developmentApproach}</p>
-        </div>
-      </section>
-    )}
-
     <section class="technology-band">
       <div class="shell technology-band-grid">
-        <div>
-          <p class="eyebrow">Technical stack</p>
-          <h2>Tools are secondary to the boundary they serve.</h2>
-        </div>
-        <div class="tag-list tag-list-large" aria-label={`${project.title} technologies`}>
-          {project.technologies.map((technology) => <span>{technology}</span>)}
-        </div>
+        <h2>Technical stack</h2>
+        <div class="tag-list tag-list-large" aria-label={`${project.title} technologies`}>{project.technologies.map((technology) => <span>{technology}</span>)}</div>
       </div>
     </section>
 
-    <footer class="case-footer">
-      <div class="shell case-footer-grid">
-        <p>{project.sourceNote}</p>
-        <a href={withBase(`/portfolio/${nextProject.slug}`)}>
-          <span>Next project</span>
-          <strong>{nextProject.title} →</strong>
-        </a>
-      </div>
-    </footer>
+    <footer class="case-footer"><div class="shell case-footer-grid"><a href={withBase(`/portfolio/${nextProject.slug}`)}><span>Next project</span><strong>{nextProject.title} →</strong></a></div></footer>
   </article>
 </BaseLayout>

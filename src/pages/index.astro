@@ -3,141 +3,46 @@ import ProjectCard from "../components/ProjectCard.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { credentials, experience, profile } from "../data/profile";
-import { getPlacements } from "../data/projects";
+import { getPlacements, getProject } from "../data/projects";
 import { withBase } from "../lib/paths";
 
 const featured = getPlacements("featured");
-const inProgress = getPlacements("in_progress");
+const currentResearch = [getProject("tension-modeling")!, getProject("relay")!];
 ---
 
 <BaseLayout>
   <section class="hero">
     <div class="shell hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow">{profile.focus}</p>
-        <h1>{profile.name}</h1>
-        <p class="hero-role">{profile.role}</p>
-        <p class="hero-statement">{profile.statement}</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href={withBase("/portfolio")}>View projects</a>
-          <a class="button button-secondary" href={withBase("/contact")}>Contact</a>
-        </div>
+        <p class="eyebrow">{profile.focus}</p><h1>{profile.name}</h1><p class="hero-role">{profile.role}</p><p class="hero-statement">{profile.statement}</p>
+        <div class="hero-actions"><a class="button button-primary" href={withBase("/portfolio")}>View projects</a><a class="button button-secondary" href={withBase("/contact")}>Contact</a></div>
         <ul class="hero-proof" aria-label="Professional summary">
           <li><strong>20+ years</strong><span>Energy and subsurface engineering</span></li>
           <li><strong>Berkeley MIDS</strong><span>Completed 2026 · GPA 3.922</span></li>
-          <li><strong>Applied AI</strong><span>ML systems, scientific computing and evaluation</span></li>
+          <li><strong>Applied AI</strong><span>ML systems and scientific computing</span></li>
         </ul>
       </div>
-      <div class="hero-portrait-wrap">
-        <div class="depth-scale" aria-hidden="true"><span>000</span><span>100</span><span>200</span><span>300</span></div>
-        <figure class="hero-portrait">
-          <img src={withBase("/assets/carlos-schrupp.webp")} alt="Portrait of Carlos Schrupp" width="318" height="296" />
-          <figcaption>
-            <span>Electronics engineer</span>
-            <span>Data scientist</span>
-          </figcaption>
-        </figure>
-      </div>
+      <figure class="hero-portrait"><img src={withBase("/assets/carlos-schrupp.webp")} alt="Portrait of Carlos Schrupp" width="318" height="296" loading="eager" /><figcaption><span>Applied AI</span><span>Computational engineering</span></figcaption></figure>
     </div>
   </section>
 
-  <section class="section selected-work" id="work">
-    <div class="shell">
-      <SectionHeading
-        eyebrow="Featured"
-        title="Different kinds of proof, not six versions of the same project."
-        copy="Two independent technical case studies and two collaborative Berkeley projects, selected for distinct signals: applied AI, scientific software, cloud AI products and large-scale ML."
-      />
-      <div class="featured-grid">
-        {featured.map((placement) => <ProjectCard placement={placement} />)}
-      </div>
-      <a class="section-link" href={withBase("/portfolio")}>View the full project index <span aria-hidden="true">→</span></a>
-    </div>
-  </section>
+  <section class="section selected-work" id="work"><div class="shell"><SectionHeading eyebrow="Work" title="Featured projects" /><div class="featured-grid">{featured.map((placement) => <ProjectCard placement={placement} />)}</div><a class="section-link" href={withBase("/portfolio")}>View all selected work <span aria-hidden="true">→</span></a></div></section>
 
-  <section class="section progress-section">
-    <div class="shell">
-      <SectionHeading
-        eyebrow="In progress"
-        title="Substantial work with an explicit frontier."
-        copy="These projects already have implemented systems or scientific evidence, but an important capability or acceptance claim is still open."
-      />
-      <div class="progress-grid">
-        {inProgress.map((placement) => <ProjectCard placement={placement} compact />)}
-      </div>
-    </div>
-  </section>
+  <section class="section experience-section" id="experience"><div class="shell"><SectionHeading eyebrow="Background" title="Experience" /><div class="experience-list">
+    {experience.map((item) => <article class="experience-item"><div><h3>{item.organization}</h3><p class="experience-role">{item.role}</p><p class="experience-period">{item.period}</p></div><div><p>{item.summary}</p><p class="evidence">{item.evidence}</p></div></article>)}
+  </div></div></section>
 
-  <section class="section about-section" id="about">
-    <div class="shell about-grid">
-      <SectionHeading eyebrow="About" title="Engineering experience before machine learning became the tool." />
-      <div class="about-copy">
-        <p class="lead">
-          I am an Electronics Engineer with more than two decades in oil and gas, working with well logs, geological and geophysical data, acquisition QA/QC and operational risk.
-        </p>
-        <p>
-          UC Berkeley's MIDS program added machine learning, statistics, data engineering, NLP and production AI systems to that foundation. I now focus on systems where engineering judgment is part of the model boundary—not merely background context.
-        </p>
-        <div class="about-pillars">
-          <div><span>01</span><strong>Subsurface data</strong><p>Well logs, acquisition quality and technical validation.</p></div>
-          <div><span>02</span><strong>Applied ML</strong><p>Models and analytical workflows grounded in physical or operational constraints.</p></div>
-          <div><span>03</span><strong>AI systems</strong><p>Retrieval, orchestration, evaluation and governed agent workflows.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section class="section current-research-section"><div class="shell"><SectionHeading eyebrow="Current work" title="Current research" /><div class="research-list">
+    {currentResearch.map((project) => <article><div><h3>{project.title}</h3><span>{project.status}</span></div><p>{project.summary}</p></article>)}
+  </div></div></section>
 
-  <section class="section experience-section" id="experience">
-    <div class="shell">
-      <SectionHeading
-        eyebrow="Experience"
-        title="From field execution to operator decisions and independent consulting."
-        copy="The domain experience behind the technical work in this portfolio."
-      />
-      <div class="experience-list">
-        {experience.map((item, index) => (
-          <article class="experience-item">
-            <p class="experience-index">0{index + 1}</p>
-            <div>
-              <h3>{item.organization}</h3>
-              <p class="experience-role">{item.role}</p>
-              <p class="experience-period">{item.period}</p>
-            </div>
-            <div>
-              <p>{item.summary}</p>
-              <p class="evidence">{item.evidence}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
+  <section class="section about-section" id="about"><div class="shell about-grid"><SectionHeading eyebrow="About" title="Applied AI & Computational Engineering" /><div class="about-copy">
+    <p class="lead">I am an Electronics Engineer with more than two decades in oil and gas, spanning well logging, acquisition QA/QC, field operations and technical decision-making.</p>
+    <p>UC Berkeley's MIDS program added machine learning, statistics, data engineering and production AI systems to that foundation. I now build software where domain knowledge changes the technical design.</p>
+    <p>I design the architecture, experiments and acceptance tests. Coding agents write much of the implementation, and I review and test what they produce.</p>
+  </div></div></section>
 
-  <section class="section credentials-section">
-    <div class="shell">
-      <SectionHeading eyebrow="Education" title="Statistical depth built on an engineering foundation." />
-      <div class="credential-grid">
-        {credentials.map((item) => (
-          <article>
-            <p class="credential-institution">{item.institution}</p>
-            <h3>{item.credential}</h3>
-            <p>{item.detail}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
+  <section class="section credentials-section"><div class="shell"><SectionHeading eyebrow="Education" title="Education" /><div class="credential-grid">{credentials.map((item) => <article><p class="credential-institution">{item.institution}</p><h3>{item.credential}</h3><p>{item.detail}</p></article>)}</div></div></section>
 
-  <section class="contact-band">
-    <div class="shell contact-band-grid">
-      <div>
-        <p class="eyebrow">Contact</p>
-        <h2>Engineering context should survive the handoff to the model.</h2>
-      </div>
-      <div>
-        <p>Interested in applied AI, ML systems, computational engineering, energy or industrial work where domain knowledge changes technical decisions.</p>
-        <a class="button button-light" href={withBase("/contact")}>Start a conversation</a>
-      </div>
-    </div>
-  </section>
+  <section class="contact-band"><div class="shell contact-band-grid"><div><p class="eyebrow">Contact</p><h2>Interested in applied AI, computational engineering or energy-domain work?</h2></div><a class="button button-light" href={withBase("/contact")}>Get in touch</a></div></section>
 </BaseLayout>

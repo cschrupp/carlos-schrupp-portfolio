@@ -13,21 +13,13 @@ export type Accent = "teal" | "orange" | "blue" | "violet";
 export type ProjectLink = { label: string; href: string };
 export type ProjectFact = { value: string; label: string; detail: string };
 
-export type ProjectFlowStep = {
-  title: string;
-  detail?: string;
-};
-
 export type ProjectVisual = {
-  type: "image" | "diagram" | "flow";
-  src?: string;
+  type: "image";
+  src: string;
   alt: string;
   caption?: string;
-  labels?: string[];
-  heading?: string;
-  subheading?: string;
-  steps?: ProjectFlowStep[];
-  feedback?: string;
+  width?: number;
+  height?: number;
 };
 
 export type ProjectSection = {
@@ -48,7 +40,7 @@ export type ProjectSection = {
   bullets?: string[];
   facts?: ProjectFact[];
   phaseId?: string;
-  caveat?: string;
+  code?: string;
 };
 
 export type ProjectPhase = {
@@ -56,11 +48,6 @@ export type ProjectPhase = {
   label: string;
   status: string;
   summary: string;
-};
-
-export type ProjectHeroMeta = {
-  label: string;
-  value: string;
 };
 
 export type Project = {
@@ -81,13 +68,10 @@ export type Project = {
   collections: CollectionId[];
   links: ProjectLink[];
   facts: ProjectFact[];
-  visual: ProjectVisual;
+  visual?: ProjectVisual;
   media?: ProjectVisual[];
   phases?: ProjectPhase[];
-  heroMeta?: ProjectHeroMeta[];
-  developmentApproach?: string;
   sections: ProjectSection[];
-  sourceNote: string;
 };
 
 export type ProjectCardPlacement = {

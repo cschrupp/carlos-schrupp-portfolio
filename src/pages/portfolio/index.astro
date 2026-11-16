@@ -2,65 +2,14 @@
 import ProjectCard from "../../components/ProjectCard.astro";
 import SectionHeading from "../../components/SectionHeading.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getPlacements } from "../../data/projects";
+import { getPlacements, getProject } from "../../data/projects";
 
 const featured = getPlacements("featured");
-const inProgress = getPlacements("in_progress");
-const mids = getPlacements("mids");
+const currentResearch = [getProject("tension-modeling")!, getProject("relay")!];
 ---
 
-<BaseLayout
-  title="Portfolio — Carlos Schrupp"
-  description="Applied AI, scientific software, computational engineering and selected UC Berkeley MIDS work by Carlos Schrupp."
->
-  <section class="page-hero portfolio-hero">
-    <div class="shell page-hero-grid">
-      <div>
-        <p class="eyebrow">Portfolio</p>
-        <h1>Selected technical work.</h1>
-      </div>
-      <p class="page-intro">
-        Projects are grouped by maturity and context. A card can appear in more than one collection, but every project has one canonical page and one evidence boundary.
-      </p>
-    </div>
-  </section>
-
-  <section class="section portfolio-collection">
-    <div class="shell">
-      <SectionHeading
-        eyebrow="Featured"
-        title="The clearest view of my current technical range."
-        copy="Independent AI and scientific-software work alongside collaborative Berkeley projects."
-      />
-      <div class="featured-grid">
-        {featured.map((placement) => <ProjectCard placement={placement} />)}
-      </div>
-    </div>
-  </section>
-
-  <section class="section portfolio-collection progress-section">
-    <div class="shell">
-      <SectionHeading
-        eyebrow="In progress"
-        title="Implemented work with an unresolved frontier."
-        copy="These projects are substantial enough to review now, but their open claims remain visible rather than being written as finished products."
-      />
-      <div class="progress-grid">
-        {inProgress.map((placement) => <ProjectCard placement={placement} compact />)}
-      </div>
-    </div>
-  </section>
-
-  <section class="section portfolio-collection mids-section">
-    <div class="shell">
-      <SectionHeading
-        eyebrow="UC Berkeley MIDS"
-        title="Selected graduate work."
-        copy="Academic projects are curated for a distinct technical signal rather than listed exhaustively."
-      />
-      <div class="mids-grid">
-        {mids.map((placement) => <ProjectCard placement={placement} compact />)}
-      </div>
-    </div>
-  </section>
+<BaseLayout title="Portfolio — Carlos Schrupp" description="Applied AI, scientific software, computational engineering and selected UC Berkeley MIDS work by Carlos Schrupp.">
+  <section class="page-hero portfolio-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">Portfolio</p><h1>Selected technical work</h1></div><p class="page-intro">Four projects show the strongest current work. Two additional research programs are included below while their next publishable artifacts are being prepared.</p></div></section>
+  <section class="section portfolio-collection"><div class="shell"><SectionHeading eyebrow="Projects" title="Featured projects" /><div class="featured-grid">{featured.map((placement) => <ProjectCard placement={placement} />)}</div></div></section>
+  <section class="section current-research-section"><div class="shell"><SectionHeading eyebrow="Current work" title="Current research" /><div class="research-list">{currentResearch.map((project) => <article><div><h3>{project.title}</h3><span>{project.status}</span></div><p>{project.summary}</p></article>)}</div></div></section>
 </BaseLayout>

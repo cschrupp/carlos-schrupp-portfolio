@@ -5,90 +5,54 @@ export const flightSentry: Project = {
   title: "Flight Sentry",
   shortTitle: "Flight Sentry",
   eyebrow: "UC Berkeley MIDS · ML at Scale",
-  summary: "Large-scale flight-delay prediction using flight and weather data under a pre-departure information boundary.",
+  summary: "Large-scale flight-delay prediction using flight and weather data available before departure.",
   description:
-    "A collaborative Berkeley MIDS project that treated data joining, temporal leakage and distributed experimentation as part of the machine-learning problem rather than as preprocessing details.",
+    "A collaborative Berkeley project that joined roughly 31 million domestic-flight records with weather data under a strict point-in-time prediction boundary.",
   detailMode: "compact",
   role: "Custom data join · MLP/CNN experiments",
-  teamContext: "Collaborative UC Berkeley MIDS Machine Learning at Scale project",
+  teamContext: "UC Berkeley MIDS Machine Learning at Scale team project",
   status: "Completed academic project",
-  statusDetail:
-    "Team project with a Berkeley-hosted public presentation; portfolio attribution stays separate between team results and Carlos's contribution.",
+  statusDetail: "Completed team project; the headline model results below are team results.",
   dates: "2025",
   accent: "violet",
-  technologies: ["PySpark", "Databricks", "Spark ML", "TensorFlow", "Weather data", "Temporal validation"],
+  technologies: ["PySpark", "Databricks", "Spark ML", "TensorFlow", "NOAA weather", "Temporal validation"],
   collections: ["featured", "mids"],
-  links: [
-    {
-      label: "Berkeley project site",
-      href: "https://groups.ischool.berkeley.edu/flight_delay_prediction_model/",
-    },
-  ],
+  links: [{ label: "Berkeley project site", href: "https://groups.ischool.berkeley.edu/flight_delay_prediction_model/" }],
   facts: [
-    {
-      value: "~31M",
-      label: "Domestic-flight records",
-      detail: "Team dataset scale reported in the accepted portfolio research/architecture source set.",
-    },
-    {
-      value: "Point-in-time",
-      label: "Prediction boundary",
-      detail: "Features were constrained to information available before departure to reduce leakage.",
-    },
-    {
-      value: "Join + MLP/CNN",
-      label: "Carlos's contribution",
-      detail: "Custom data join plus neural-network experiments; final ensemble remained team work.",
-    },
+    { value: "~31M", label: "Flight records", detail: "Domestic-flight scale reported by the project team." },
+    { value: "0.697", label: "Team F2 score", detail: "Final team evaluation at the 15-minute delay threshold." },
+    { value: "0.72", label: "Team AUC-PR", detail: "Final team evaluation reported in the project write-up." },
   ],
-  visual: {
-    type: "diagram",
-    alt: "Flight Sentry flow from flight and weather data through temporal joining, distributed features and model evaluation.",
-    caption: "Project summary diagram derived from the accepted team-project evidence.",
-    labels: ["Flights", "NOAA weather", "Point-in-time join", "Spark features", "Delay models"],
-  },
   sections: [
     {
       id: "overview",
       kind: "overview",
-      eyebrow: "Project snapshot",
-      title: "At this scale, the join was part of the model.",
+      eyebrow: "What we built",
+      title: "Predicting delays without future information",
       paragraphs: [
-        "Flight Sentry combined U.S. domestic-flight history with weather information to predict delays before departure. The project used distributed processing and temporal validation rather than treating the dataset as a conventional in-memory tabular exercise.",
-        "The Berkeley-hosted site remains the primary public project presentation. This portfolio page keeps the emphasis on scale, leakage control and contribution attribution.",
-      ],
-    },
-    {
-      id: "technical-signal",
-      kind: "architecture",
-      eyebrow: "Technical signal",
-      title: "Distributed ML with a strict information boundary.",
-      bullets: [
-        "Approximately 31 million domestic-flight records in the accepted team write-up.",
-        "Flight and NOAA weather data joined with point-in-time constraints so future information did not leak into pre-departure prediction.",
-        "PySpark / Databricks workflow for feature engineering and model experimentation.",
-        "Team exploration included classification, regression, tree ensembles and neural-network approaches.",
+        "Flight Sentry combined U.S. domestic-flight history with NOAA weather data to predict delays before departure. The difficult part was not only model choice: every feature had to respect what would actually have been known at prediction time.",
       ],
     },
     {
       id: "contribution",
       kind: "contribution",
       eyebrow: "My contribution",
-      title: "Data joining and neural-network experiments.",
-      paragraphs: [
-        "My documented contribution centered on the custom data join and MLP/CNN modeling experiments. The final team result should remain attributed to the project team rather than presented as my individual model.",
+      title: "Point-in-time data joining and neural-network experiments",
+      bullets: [
+        "Built part of the custom distributed join that aligned flight and weather data at large scale.",
+        "Worked within the pre-departure information boundary so later weather or flight outcomes did not leak into training features.",
+        "Implemented MLP and CNN experiments as part of the team's model comparison.",
+        "Contributed those experiments to the broader team workflow; the final ensemble and headline metrics are team results.",
       ],
     },
     {
-      id: "artifacts",
-      kind: "artifacts",
-      eyebrow: "Go deeper",
-      title: "Berkeley project presentation.",
-      bullets: [
-        "The Berkeley-hosted Flight Sentry site contains the fuller project narrative, methodology and team results.",
+      id: "result",
+      kind: "evidence",
+      eyebrow: "Team result",
+      title: "Final project evaluation",
+      paragraphs: [
+        "The team's final evaluation reported F2 = 0.697 and AUC-PR = 0.72 when regression outputs were evaluated against the 15-minute delay threshold.",
       ],
     },
   ],
-  sourceNote:
-    "The Berkeley page is linked as the primary public source. Because that site was not retrievable by the implementation browser backend, this page uses only facts already accepted in the portfolio architecture/research record and does not invent refreshed metrics.",
 };

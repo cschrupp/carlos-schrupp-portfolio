@@ -1,48 +1,20 @@
 ---
-import type { Project, ProjectVisual as Visual } from "../data/projects";
+import type { ProjectVisual as Visual } from "../data/projects";
 import { withBase } from "../lib/paths";
 
 interface Props {
-  project: Project;
   visual?: Visual;
   compact?: boolean;
+  eager?: boolean;
 }
 
-const { project, visual = project.visual, compact = false } = Astro.props;
-const imageSrc = visual.src?.startsWith("http") ? visual.src : visual.src ? withBase(visual.src) : undefined;
+const { visual, compact = false, eager = false } = Astro.props;
+const imageSrc = visual?.src.startsWith("http") ? visual.src : visual?.src ? withBase(visual.src) : undefined;
 ---
 
-<div class:list={["project-visual-frame", `accent-${project.accent}`, `visual-${visual.type}`, { compact }]}>
-  {visual.type === "image" && imageSrc ? (
-    <img src={imageSrc} alt={visual.alt} loading="lazy" />
-  ) : visual.type === "flow" ? (
-    <div class="product-flow" role="img" aria-label={visual.alt}>
-      <div class="product-flow-heading">
-        {visual.heading && <h2>{visual.heading}</h2>}
-        {visual.subheading && <p>{visual.subheading}</p>}
-      </div>
-      <div class="flow-steps">
-        {(visual.steps ?? []).map((step, index) => (
-          <article class="flow-step">
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <strong>{step.title}</strong>
-            {step.detail && <small>{step.detail}</small>}
-          </article>
-        ))}
-      </div>
-      {visual.feedback && (
-        <p class="flow-feedback"><span aria-hidden="true">↺</span>{visual.feedback}</p>
-      )}
-    </div>
-  ) : (
-    <div class="system-diagram" role="img" aria-label={visual.alt}>
-      {(visual.labels ?? []).map((label, index) => (
-        <>
-          <span class="system-node"><i>{String(index + 1).padStart(2, "0")}</i>{label}</span>
-          {index < (visual.labels?.length ?? 0) - 1 && <b aria-hidden="true">→</b>}
-        </>
-      ))}
-    </div>
-  )}
-  {visual.caption && <p class="visual-caption">{visual.caption}</p>}
-</div>
+{visual && imageSrc && (
+  <figure class:list={["project-visual-frame", { compact }]}>
+    <img src={imageSrc} alt={visual.alt} width={visual.width} height={visual.height} loading={eager ? "eager" : "lazy"} decoding="async" />
+    {visual.caption && <figcaption class="visual-caption">{visual.caption}</figcaption>}
+  </figure>
+)}
