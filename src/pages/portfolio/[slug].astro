@@ -7,7 +7,9 @@ import { withBase } from "../../lib/paths";
 const publicProjects = projects.filter((project) => project.detailMode !== "preview");
 
 export function getStaticPaths() {
-  return publicProjects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+  return projects
+    .filter((project) => project.detailMode !== "preview")
+    .map((project) => ({ params: { slug: project.slug }, props: { project } }));
 }
 
 interface Props { project: Project; }
