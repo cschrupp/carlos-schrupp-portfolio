@@ -130,5 +130,5 @@ export const seneca: Project = {
     },
   ],
   sourceNote:
-    "Claims on this page are grounded in project source and evaluation records. Product screenshots are added only when they are captured from the real Seneca application.",
+    "Claims on this page are grounded in project source and evaluation records.",
 };
