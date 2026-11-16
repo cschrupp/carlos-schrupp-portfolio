@@ -6,7 +6,7 @@ import { flightSentry } from "./projects/flightSentry";
 import { tension } from "./projects/tension";
 import { relay } from "./projects/relay";
 
-export type { CollectionId, DetailMode, Project, ProjectCardPlacement, ProjectFact, ProjectLink, ProjectPhase, ProjectSection, ProjectSlug, ProjectVisual } from "./projects/types";
+export type { CollectionId, DetailMode, Project, ProjectCardPlacement, ProjectFact, ProjectFlowStep, ProjectLink, ProjectPhase, ProjectSection, ProjectSlug, ProjectVisual } from "./projects/types";
 
 export const projects: Project[] = [seneca, wellplot, codingRabbit, flightSentry, tension, relay];
 
@@ -18,7 +18,7 @@ export const cardPlacements: ProjectCardPlacement[] = [
     title: "Seneca",
     eyebrow: "Applied AI · local knowledge systems",
     summary: "Retrieval, grounded generation, human evaluation and runtime qualification in one local-first product.",
-    status: "Active product R&D",
+    status: "Active development product",
     priority: 1,
   },
   {
